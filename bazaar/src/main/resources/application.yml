@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: bazaar
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bazaar
+    username: postgres
+    password: 1234
+    driverClassName:
+      jpa: org.postgresql.Driver
+    hibernate:
+      ddl-auto: update
+  server:
+    port: 8080
