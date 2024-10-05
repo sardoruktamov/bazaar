@@ -1,4 +1,4 @@
-package uz.bazaar;
+package uz.bazaar.marketzone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
