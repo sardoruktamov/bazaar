@@ -37,6 +37,39 @@ public class BazaarService {
                 .message("OK")
                 .data(bazaarDto)
                 .build();
+    }
 
+    public ResponseDto<BazaarDto> addBazaar(BazaarDto bazaarDto){
+        Bazaar bazaar = bazaarMapper.toEntity(bazaarDto);
+        try {
+            bazaarRepository.save(bazaar);
+            return ResponseDto.<BazaarDto>builder()
+                    .success(true)
+                    .message("Bazaar successfully saved")
+                    .data(bazaarMapper.toDto(bazaar))
+                    .build();
+        }catch (Exception e){
+            log.error("There was an error saving the bazaar: {}",e.getMessage());
+            return ResponseDto.<BazaarDto>builder()
+                    .message("Bazaar not saved!")
+                    .code(2)
+                    .build();
+        }
+    }
+
+    public ResponseDto<BazaarDto> delete(Integer id){
+        Optional<Bazaar> dltGoal = bazaarRepository.findById(id);
+        if (dltGoal.isEmpty()){
+            return ResponseDto.<BazaarDto>builder()
+                    .code(-1)
+                    .message("Bazaar not found!")
+                    .build();
+        }
+        bazaarRepository.deleteById(id);
+        return ResponseDto.<BazaarDto>builder()
+                .success(true)
+                .message("Bazaar successfully deleted!")
+                .data(bazaarMapper.toDto(dltGoal.get()))
+                .build();
     }
 }
