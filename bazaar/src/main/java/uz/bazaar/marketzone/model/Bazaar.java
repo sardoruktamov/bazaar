@@ -10,13 +10,12 @@ import lombok.Setter;
 
 import java.util.Date;
 
-
 @Entity
-@Table(name = "bazaar")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "bazaar")
 public class Bazaar {
 
     @Id
@@ -47,5 +46,4 @@ public class Bazaar {
 
     @Column(name = "create_date")
     private Date createDate;
-
 }
