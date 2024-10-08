@@ -25,7 +25,7 @@ public class BazaarService {
         if (bazaar.isEmpty()){
             return ResponseDto.<BazaarDto>builder()
                     .success(false)
-                    .message("This bazaar not found in" + id + "- id")
+                    .message("This bazaar not found in " + id + " - id")
                     .code(-1)
                     .build();
         }
