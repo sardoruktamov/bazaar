@@ -28,6 +28,6 @@ public class BazaarDto {
 
     private String phoneNumber;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") // JSON formatni ham ko'rsating
-    private LocalDateTime createDate;
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private LocalDate createDate;
 }

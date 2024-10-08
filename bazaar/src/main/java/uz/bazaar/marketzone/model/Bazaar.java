@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -45,7 +47,8 @@ public class Bazaar {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "create_date")
-    private LocalDateTime createDate;
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private LocalDate createDate;
 }
