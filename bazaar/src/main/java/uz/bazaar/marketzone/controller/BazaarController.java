@@ -23,5 +23,9 @@ public class BazaarController {
         return bazaarService.addBazaar(bazaarDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseDto<BazaarDto> deleteBazaar(@PathVariable Integer id){
+        return bazaarService.delete(id);
+    }
 
 }
