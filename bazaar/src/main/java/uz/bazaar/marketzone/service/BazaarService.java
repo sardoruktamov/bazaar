@@ -9,7 +9,9 @@ import uz.bazaar.marketzone.model.Bazaar;
 import uz.bazaar.marketzone.repository.BazaarRepository;
 import uz.bazaar.marketzone.service.mapper.BazaarMapper;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -72,4 +74,16 @@ public class BazaarService {
                 .data(bazaarMapper.toDto(dltGoal.get()))
                 .build();
     }
+
+    public List<BazaarDto> findByParams(String stir, String name, String phoneNumber) {
+        List<Bazaar> bazaars = bazaarRepository.findByParams(
+                (stir != null && !stir.isEmpty()) ? stir : null,
+                (name != null && !name.isEmpty()) ? name : null,
+                (phoneNumber != null && !phoneNumber.isEmpty()) ? phoneNumber : null
+        );
+        return bazaars.stream()
+                .map(bazaarMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }
