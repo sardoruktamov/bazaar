@@ -8,7 +8,7 @@ import uz.bazaar.marketzone.model.Bazaar;
 import uz.bazaar.marketzone.model.Category;
 
 @Mapper(componentModel = "spring")
-public class CategoryMapper {
+public abstract class CategoryMapper {
 
     public abstract CategoryDto toDto(Category category);
 
