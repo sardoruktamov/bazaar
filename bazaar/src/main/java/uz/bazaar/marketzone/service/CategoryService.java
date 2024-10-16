@@ -11,6 +11,8 @@ import uz.bazaar.marketzone.model.Category;
 import uz.bazaar.marketzone.repository.CategoryRepository;
 import uz.bazaar.marketzone.service.mapper.CategoryMapper;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -35,5 +37,21 @@ public class CategoryService {
                     .code(2)
                     .build();
         }
+    }
+
+    public ResponseDto<CategoryDto> delete(Integer id){
+        Optional<Category> deltcat = categoryRepository.findById(id);
+        if (deltcat.isEmpty()){
+            return ResponseDto.<CategoryDto>builder()
+                    .code(-1)
+                    .message("Category not found!")
+                    .build();
+        }
+        categoryRepository.deleteById(id);
+        return ResponseDto.<CategoryDto>builder()
+                .success(true)
+                .message("Category successfully deleted!")
+                .data(categoryMapper.toDto(deltcat.get()))
+                .build();
     }
 }

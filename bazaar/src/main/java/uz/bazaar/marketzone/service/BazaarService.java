@@ -60,8 +60,8 @@ public class BazaarService {
     }
 
     public ResponseDto<BazaarDto> delete(Integer id){
-        Optional<Bazaar> dltGoal = bazaarRepository.findById(id);
-        if (dltGoal.isEmpty()){
+        Optional<Bazaar> deltBazaar = bazaarRepository.findById(id);
+        if (deltBazaar.isEmpty()){
             return ResponseDto.<BazaarDto>builder()
                     .code(-1)
                     .message("Bazaar not found!")
@@ -71,7 +71,7 @@ public class BazaarService {
         return ResponseDto.<BazaarDto>builder()
                 .success(true)
                 .message("Bazaar successfully deleted!")
-                .data(bazaarMapper.toDto(dltGoal.get()))
+                .data(bazaarMapper.toDto(deltBazaar.get()))
                 .build();
     }
 
