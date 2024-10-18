@@ -20,13 +20,12 @@ public class SubCategory {
     @SequenceGenerator(name = "subcategory_seq", sequenceName = "subcategory_id_seq", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "category_id", nullable = false)
-    private Integer categoryId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @NotNull(message = "name cannot be null")
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-
 
 }
