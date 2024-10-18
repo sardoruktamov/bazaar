@@ -39,6 +39,27 @@ public class CategoryService {
         }
     }
 
+    // Kategoriya yangilash (PUT uchun)
+    public ResponseDto<CategoryDto> updateCategory(Integer id, CategoryDto categoryDTO) {
+        return categoryRepository.findById(id).map(category -> {
+            category.setName(categoryDTO.getName());
+            categoryRepository.save(category);
+
+            CategoryDto updatedCategoryDTO = new CategoryDto(category.getId(), category.getName());
+
+            return ResponseDto.<CategoryDto>builder()
+                    .success(true)
+                    .message("Category updated successfully!")
+                    .code(0)
+                    .data(updatedCategoryDTO)
+                    .build();
+        }).orElseGet(() -> ResponseDto.<CategoryDto>builder()
+                .success(false)
+                .message("Category not found!")
+                .code(-1)
+                .build());
+    }
+
     public ResponseDto<CategoryDto> delete(Integer id){
         Optional<Category> deltcat = categoryRepository.findById(id);
         if (deltcat.isEmpty()){
