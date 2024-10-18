@@ -59,6 +59,29 @@ public class BazaarService {
         }
     }
 
+    public ResponseDto<BazaarDto> updateBazaar(Integer id, BazaarDto bazaarDto) {
+        // ID bo'yicha mavjud bazaarni topish
+        Optional<Bazaar> optionalBazaar = bazaarRepository.findById(id);
+        if (optionalBazaar.isEmpty()) {
+            return ResponseDto.<BazaarDto>builder()
+                    .success(false)
+                    .message("Bazaar not found!")
+                    .code(-1)
+                    .build();
+        }
+        Bazaar existingBazaar = optionalBazaar.get();
+        // Dto'dan Entityga o'girish
+        Bazaar updatedBazaar = bazaarMapper.toEntity(bazaarDto);
+        updatedBazaar.setId(existingBazaar.getId()); // id'ni saqlab qo'yish
+
+        // Yangilangan entity'ni saqlash
+        bazaarRepository.save(updatedBazaar);
+        return ResponseDto.<BazaarDto>builder()
+                .success(true)
+                .message("Bazaar successfully updated!")
+                .data(bazaarMapper.toDto(updatedBazaar))
+                .build();
+    }
     public ResponseDto<BazaarDto> delete(Integer id){
         Optional<Bazaar> deltBazaar = bazaarRepository.findById(id);
         if (deltBazaar.isEmpty()){
@@ -85,5 +108,6 @@ public class BazaarService {
                 .map(bazaarMapper::toDto)
                 .collect(Collectors.toList());
     }
+
 
 }

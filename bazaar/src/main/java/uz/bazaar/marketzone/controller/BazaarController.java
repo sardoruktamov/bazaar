@@ -16,9 +16,16 @@ public class BazaarController {
 
     private final BazaarService bazaarService;
 
+    // POST request - yangi Bazaarni qo'shish
     @PostMapping
     public ResponseDto<BazaarDto> addBazaar(@Valid @RequestBody BazaarDto bazaarDto){
         return bazaarService.addBazaar(bazaarDto);
+    }
+
+    // PUT request - butun Bazaar resursini yangilash
+    @PutMapping("/{id}")
+    public ResponseDto<BazaarDto> updateBazaar(@PathVariable Integer id, @Valid @RequestBody BazaarDto bazaarDto) {
+        return bazaarService.updateBazaar(id, bazaarDto);
     }
 
     @GetMapping("/{id}")
