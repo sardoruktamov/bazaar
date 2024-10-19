@@ -22,7 +22,7 @@ public class SubCategory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private Category categoryId;
 
     @NotNull(message = "name cannot be null")
     @Column(name = "name", nullable = false, unique = true)
