@@ -21,7 +21,7 @@ public class UsersDTO {
     @NotBlank(message = "lastName is null or not contains any character")
     private String lastName;
     //01.07.2000
-    @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "date format is incorrect") //dd.MM.yyyy
+//    @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "date format is incorrect") //dd.MM.yyyy
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate createDate;
     private String username;
@@ -30,4 +30,5 @@ public class UsersDTO {
     private String phoneNumber;
     @Email(message = "Email is incorrect")
     private String email;
+    private short isActive;
 }
