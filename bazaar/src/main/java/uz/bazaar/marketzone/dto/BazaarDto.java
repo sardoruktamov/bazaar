@@ -2,6 +2,7 @@ package uz.bazaar.marketzone.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class BazaarDto {
 
     private String phoneNumber;
 
+    @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "date format is incorrect") //dd.MM.yyyy
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate createDate;
 }

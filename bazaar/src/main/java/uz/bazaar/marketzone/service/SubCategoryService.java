@@ -3,9 +3,11 @@ package uz.bazaar.marketzone.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import uz.bazaar.marketzone.dto.BazaarDto;
 import uz.bazaar.marketzone.dto.CategoryDto;
 import uz.bazaar.marketzone.dto.ResponseDto;
 import uz.bazaar.marketzone.dto.SubCategoryDTO;
+import uz.bazaar.marketzone.model.Bazaar;
 import uz.bazaar.marketzone.model.Category;
 import uz.bazaar.marketzone.model.SubCategory;
 import uz.bazaar.marketzone.repository.CategoryRepository;
@@ -41,6 +43,25 @@ public class SubCategoryService {
         }
     }
 
+    public ResponseDto<SubCategoryDTO> getById(Integer id){
+        Optional<SubCategory> subCategory = subCategoryRepository.findById(id);
+
+        if (subCategory.isEmpty()){
+            return ResponseDto.<SubCategoryDTO>builder()
+                    .success(false)
+                    .message("This SubCategory not found in " + id + " - id")
+                    .code(-1)
+                    .build();
+        }
+
+        SubCategoryDTO subCategoryDTO = subCategoryMapper.toDto(subCategory.get());
+
+        return ResponseDto.<SubCategoryDTO>builder()
+                .success(true)
+                .message("OK")
+                .data(subCategoryDTO)
+                .build();
+    }
 
     public ResponseDto<SubCategoryDTO> delete(Integer id){
         Optional<SubCategory> deltcat = subCategoryRepository.findById(id);

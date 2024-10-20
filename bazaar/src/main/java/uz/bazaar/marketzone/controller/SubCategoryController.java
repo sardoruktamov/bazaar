@@ -22,6 +22,11 @@ public class SubCategoryController {
         return subCategoryService.addSubCategory(subCategoryDto);
     }
 
+    @GetMapping("/{id}")
+    public ResponseDto<SubCategoryDTO> getId(@PathVariable Integer id){
+        return subCategoryService.getById(id);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseDto<SubCategoryDTO> deleteSubCategory(@PathVariable Integer id){
         return subCategoryService.delete(id);
