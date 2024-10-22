@@ -20,13 +20,12 @@ import java.time.LocalDate;
 public class Store {
 
     @Id
-    @GeneratedValue(generator = "bazaar_seq")
-    @SequenceGenerator(name = "bazaar_seq", sequenceName = "bazaar_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "store_seq")
+    @SequenceGenerator(name = "store_seq", sequenceName = "store_id_seq", allocationSize = 1)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bazaar_id")
-    @Column(name = "bazaar_id", nullable = false)
+    @JoinColumn(name = "bazaar_id", nullable = false)
     private Bazaar bazaarId;
 
     @NotNull(message = "name cannot be null")
@@ -34,14 +33,13 @@ public class Store {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @Column(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private Users userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    @Column(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;
+
     @Column(name = "latitude", nullable = false)
     private String latitude;
 
@@ -56,6 +54,7 @@ public class Store {
     @Column(name = "phone_number", nullable = false)
     @Size(min = 12, max = 14)
     private String phoneNumber;
+
     @Column(name = "telegramm")
     private String telegramm;
 
