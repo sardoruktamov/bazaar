@@ -22,6 +22,11 @@ public class SubCategoryController {
         return subCategoryService.addSubCategory(subCategoryDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseDto<SubCategoryDTO> updateBazaar(@PathVariable Integer id, @Valid @RequestBody SubCategoryDTO subCategoryDto) {
+        return subCategoryService.updateSubCategory(id, subCategoryDto);
+    }
+
     @GetMapping("/{id}")
     public ResponseDto<SubCategoryDTO> getId(@PathVariable Integer id){
         return subCategoryService.getById(id);

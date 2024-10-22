@@ -23,6 +23,7 @@ import java.util.Optional;
 public class SubCategoryService {
 
     private final SubCategoryRepository subCategoryRepository;
+    private final CategoryRepository categoryRepository;
     private final SubCategoryMapper subCategoryMapper;
 
     public ResponseDto<SubCategoryDTO> addSubCategory(SubCategoryDTO subCategoryDTO){
@@ -43,6 +44,36 @@ public class SubCategoryService {
         }
     }
 
+    public ResponseDto<SubCategoryDTO> updateSubCategory(Integer id, SubCategoryDTO subCategoryDTO) {
+        return subCategoryRepository.findById(id).map(subCategory -> {
+            Category category = categoryRepository.findById(subCategoryDTO.getCategoryId().getId())
+                    .orElseThrow(() -> new RuntimeException("Category not found!!!"));
+
+            subCategory.setName(subCategoryDTO.getName());
+            subCategory.setCategoryId(category);
+            subCategoryRepository.save(subCategory);
+
+            SubCategoryDTO updatedSubCategoryDTO = new SubCategoryDTO(
+//                    subCategory.getId(),
+//                    subCategory.getName(),
+//                    subCategory.getCategoryId().getId()
+            );
+            updatedSubCategoryDTO.setId(id);
+            updatedSubCategoryDTO.setName(subCategoryDTO.getName());
+            updatedSubCategoryDTO.setCategoryId(subCategoryDTO.getCategoryId());
+
+            return ResponseDto.<SubCategoryDTO>builder()
+                    .success(true)
+                    .message("SubCategory updated successfully")
+                    .code(0)
+                    .data(updatedSubCategoryDTO)
+                    .build();
+        }).orElseGet(() -> ResponseDto.<SubCategoryDTO>builder()
+                .success(false)
+                .message("SubCategory not found")
+                .code(-1)
+                .build());
+    }
     public ResponseDto<SubCategoryDTO> getById(Integer id){
         Optional<SubCategory> subCategory = subCategoryRepository.findById(id);
 

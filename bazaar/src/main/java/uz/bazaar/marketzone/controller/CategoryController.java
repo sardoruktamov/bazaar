@@ -21,6 +21,11 @@ public class CategoryController {
         return categoryService.addCategory(categoryDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseDto<CategoryDto> updateBazaar(@PathVariable Integer id, @Valid @RequestBody CategoryDto categoryDto) {
+        return categoryService.updateCategory(id, categoryDto);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseDto<CategoryDto> deleteCategory(@PathVariable Integer id){
         return categoryService.delete(id);
