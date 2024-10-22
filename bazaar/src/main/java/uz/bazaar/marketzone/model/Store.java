@@ -64,13 +64,9 @@ public class Store {
 
     @Column(name = "image")
     private String image;
-    @NotNull(message = "director cannot be null")
+
     @Column(name = "is_active", columnDefinition = "false")
     private Boolean isActive = false;
-
-    @NotNull(message = "phoneNumber cannot be null")
-    @Column(name = "phone_number", nullable = false)
-    private String phoneNumber;
 
     //    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "create_date")
