@@ -28,7 +28,7 @@ public class StoreEntity {
     @JoinColumn(name = "bazaar_id", nullable = false)
     private Bazaar bazaarId;
 
-    @NotNull(message = "name cannot be null")
+//    @NotNull(message = "name cannot be null")
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -46,11 +46,11 @@ public class StoreEntity {
     @Column(name = "langitude", nullable = false)
     private String langitude;
 
-    @NotNull(message = "address cannot be null")
-    @Column(name = "address", nullable = false)
+//    @NotNull(message = "address cannot be null")
+    @Column(name = "address")
     private String address;
 
-    @NotNull(message = "Phone number cannot be null")
+//    @NotNull(message = "Phone number cannot be null")
     @Column(name = "phone_number", nullable = false)
     @Size(min = 12, max = 14)
     private String phoneNumber;
