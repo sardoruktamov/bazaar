@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "store")
-public class Store {
+public class StoreEntity {
 
     @Id
     @GeneratedValue(generator = "store_seq")
@@ -61,10 +61,11 @@ public class Store {
     @Column(name = "instagramm")
     private String instagramm;
 
-    @Column(name = "image")
-    private String image;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", nullable = true)
+    private FileModel image;
 
-    @Column(name = "is_active", columnDefinition = "false")
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
     //    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

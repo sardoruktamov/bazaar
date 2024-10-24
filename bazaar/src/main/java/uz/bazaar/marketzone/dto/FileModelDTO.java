@@ -1,5 +1,7 @@
 package uz.bazaar.marketzone.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class FileModelDTO {
@@ -10,5 +12,7 @@ public class FileModelDTO {
     private String ext;
     private String path;
     private String type;
+
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate createdAt;
 }

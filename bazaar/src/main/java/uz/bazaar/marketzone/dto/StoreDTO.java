@@ -36,12 +36,13 @@ public class StoreDTO {
 
     private String instagramm;
 
-    private FileModel image;
+    private FileModelDTO image;
 
     private Boolean isActive = false;
 
-    @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "date format is incorrect") //dd.MM.yyyy
+//    @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "date format is incorrect")
     @JsonFormat(pattern = "dd.MM.yyyy")
+    @Column(name = "create_date")
     private LocalDate createDate;
 
     private String target;
