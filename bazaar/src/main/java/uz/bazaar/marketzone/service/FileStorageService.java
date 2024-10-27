@@ -59,7 +59,7 @@ public class FileStorageService {
         FileModel fileModel = new FileModel();
         fileModel.setName(fileName);
         fileModel.setExt(ext);
-        fileModel.setPath(filePath.toString());
+        fileModel.setPath(saveAsFile(file));
         fileModel.setType(file.getContentType());
         fileModel.setCreatedAt(LocalDate.now());
         fileStorageRepository.save(fileModel);

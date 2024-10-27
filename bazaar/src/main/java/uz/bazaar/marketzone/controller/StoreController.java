@@ -27,7 +27,7 @@ public class StoreController {
 
     @PostMapping(value ="/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseDto<StoreDTO> addStore(@Valid @ModelAttribute StoreDTO storeDTO,
-                                          @RequestParam("image") MultipartFile image) {
+                                          @RequestPart("image") MultipartFile image) {
         return storeService.addStore(storeDTO, image);
     }
 
