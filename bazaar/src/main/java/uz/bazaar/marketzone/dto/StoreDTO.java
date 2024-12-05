@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import uz.bazaar.marketzone.model.Bazaar;
 import uz.bazaar.marketzone.model.Category;
 import uz.bazaar.marketzone.model.FileModel;
@@ -12,6 +16,10 @@ import uz.bazaar.marketzone.model.Users;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoreDTO {
 
     private Integer id;
