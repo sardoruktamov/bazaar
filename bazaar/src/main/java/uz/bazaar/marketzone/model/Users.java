@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import uz.bazaar.marketzone.enums.GeneralStatus;
 
 import java.time.LocalDate;
 
@@ -39,7 +40,12 @@ public class Users {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "is_active")
-    private short isActive;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private GeneralStatus status;  // ACTIVE, BLOCK ...
+
+    // will be "false" when the profile is disabled
+    @Column(name = "visible")
+    private Boolean visible = Boolean.TRUE;
 
 }
