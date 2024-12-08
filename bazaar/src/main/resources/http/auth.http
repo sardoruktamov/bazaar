@@ -1,0 +1,12 @@
+### Registration
+POST localhost:8080/auth/registration
+Content-Type: application/json
+
+{
+  "name": "Sardorbek Uktamov",
+  "username": "uktamov9198@mail.ru",
+  "password": "12345"
+}
+
+### Registration verification
+GET http://localhost:8080/auth/registration/verification/{profileId}
