@@ -30,5 +30,4 @@ public class UsersDTO {
     private String phoneNumber;
     @Email(message = "Email is incorrect")
     private String email;
-    private short isActive;
 }
