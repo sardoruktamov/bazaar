@@ -2,10 +2,7 @@ package uz.bazaar.marketzone.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.bazaar.marketzone.dto.RegistrationDTO;
 import uz.bazaar.marketzone.dto.ResponseDto;
 import uz.bazaar.marketzone.service.AuthService;
@@ -23,6 +20,15 @@ public class AuthController {
                 .success(true)
                 .message("OK")
                 .data(authService.registration(dto))
+                .build();
+    }
+
+    @GetMapping("/registration/verification/{profileId}")
+    public ResponseDto<String> regVerification(@PathVariable("profileId") Integer profileId){
+        return ResponseDto.<String>builder()
+                .success(true)
+                .message("OK")
+                .data(authService.regVerification(profileId))
                 .build();
     }
 }
