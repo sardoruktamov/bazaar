@@ -32,6 +32,12 @@ public class AuthService {
     @Autowired
     private UserRoleService userRoleService;
 
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private EmailSendingService emailSendingService;
+
     public String registration(RegistrationDTO dto){
         Optional<Users> optional = userProfileRepository.findByUsernameAndVisibleTrue(dto.getUsername());
         if (optional.isPresent()){
@@ -63,7 +69,22 @@ public class AuthService {
         userProfileRepository.save(entity);
         userRoleService.create(entity.getId(), UsersRole.ROLE_USER);
 
+        emailSendingService.sendEmailForRegistration(dto.getUsername(), entity.getId());
+
         return "User muvoffaqiyatli saqlandi!";
+    }
+
+    public String regVerification(Integer profileId) {
+        Users users = usersService.getById(profileId);
+        if (users.getStatus().equals(GeneralStatus.IN_REGISTRATION)){
+            // 1-usulda barcha fieldlarini update qiladi
+//            profile.setStatus(GeneralStatus.ACTIVE);
+//            profileRepository.save(profile);
+            // 2-usulda faqat status update bo`ladi chunli Query orqali qilindi
+            userProfileRepository.changeStatus(profileId,GeneralStatus.ACTIVE);
+            return "Verification finished!";
+        }
+        throw new AppBadException("Verification failed!");
     }
 
 
