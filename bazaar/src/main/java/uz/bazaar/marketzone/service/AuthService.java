@@ -45,9 +45,7 @@ public class AuthService {
             if (userProfile.getStatus().equals(GeneralStatus.IN_REGISTRATION)){
                 userRoleService.deleteRoles(userProfile.getId());
                 // 1-usul
-                log.error(userProfile.getFirstName() + " ---UCHIRILISHGA TAYYOR");
                 userProfileRepository.delete(userProfile);
-                log.error(userProfile.getFirstName() + " ---O'CHIB KETTIIIIII");
                 // 2-usul
                 //send sms/email orqali ro'yxatdan o'tishini davom ettirish
             }else {
@@ -57,7 +55,7 @@ public class AuthService {
 
         Users entity = new Users();
         entity.setFirstName(dto.getFirstName());
-        log.error(entity.getFirstName() + " ---  yangi yaratilindiiiii");
+        log.error(entity.getId() + " ====>entity ====== optional<======== " + optional.get().getId());
         entity.setLastName(dto.getLastName());
         entity.setUsername(dto.getUsername());
         entity.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
@@ -78,8 +76,8 @@ public class AuthService {
         Users users = usersService.getById(profileId);
         if (users.getStatus().equals(GeneralStatus.IN_REGISTRATION)){
             // 1-usulda barcha fieldlarini update qiladi
-//            profile.setStatus(GeneralStatus.ACTIVE);
-//            profileRepository.save(profile);
+//            users.setStatus(GeneralStatus.ACTIVE);
+//            userProfileRepository.save(users);
             // 2-usulda faqat status update bo`ladi chunli Query orqali qilindi
             userProfileRepository.changeStatus(profileId,GeneralStatus.ACTIVE);
             return "Verification finished!";
