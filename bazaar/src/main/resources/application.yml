@@ -1,22 +1,14 @@
 #########################
-#       DATABASE
+#       SERVER
 #########################
 spring:
   application:
     name: bazaar
-  datasource:
-    url: jdbc:postgresql://localhost:5432/bazaar
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
   server:
     port: 8080
-
-#########################
+  profiles:
+    active: local
+  #########################
 #       EMAIL SENDING
 #########################
 

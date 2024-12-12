@@ -1,0 +1,23 @@
+#########################
+#       SERVER
+#########################
+server:
+  domain: http://localhost:8080
+
+#########################
+#       DATABASE
+#########################
+spring:
+  application:
+    name: bazaar
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bazaar
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    active: local
