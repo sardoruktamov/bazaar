@@ -1,5 +1,6 @@
 package uz.bazaar.marketzone.service;
 
+import io.jsonwebtoken.JwtException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import uz.bazaar.marketzone.enums.UsersRole;
 import uz.bazaar.marketzone.exceptions.AppBadException;
 import uz.bazaar.marketzone.model.Users;
 import uz.bazaar.marketzone.repository.UserProfileRepository;
+import uz.bazaar.marketzone.utils.JwtUtil;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -72,16 +74,20 @@ public class AuthService {
         return "User muvoffaqiyatli saqlandi!";
     }
 
-    public String regVerification(Integer profileId) {
-        Users users = usersService.getById(profileId);
-        if (users.getStatus().equals(GeneralStatus.IN_REGISTRATION)){
-            // 1-usulda barcha fieldlarini update qiladi
+    public String regVerification(String token) {
+
+        try {
+            Integer userId = JwtUtil.decodeRegVerToken(token);
+            Users users = usersService.getById(userId);
+            if (users.getStatus().equals(GeneralStatus.IN_REGISTRATION)){
+                // 1-usulda barcha fieldlarini update qiladi
 //            users.setStatus(GeneralStatus.ACTIVE);
 //            userProfileRepository.save(users);
-            // 2-usulda faqat status update bo`ladi chunli Query orqali qilindi
-            userProfileRepository.changeStatus(profileId,GeneralStatus.ACTIVE);
-            return "Verification finished!";
-        }
+                // 2-usulda faqat status update bo`ladi chunli Query orqali qilindi
+                userProfileRepository.changeStatus(userId,GeneralStatus.ACTIVE);
+                return "Verification finished!";
+            }
+        }catch (JwtException e){}
         throw new AppBadException("Verification failed!");
     }
 

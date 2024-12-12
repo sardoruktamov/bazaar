@@ -8,12 +8,16 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import uz.bazaar.marketzone.utils.JwtUtil;
 
 @Service
 public class EmailSendingService {
 
     @Value("${spring.mail.username}")
     private String fromAccount;
+
+    @Value("${server.domain}")
+    private String serverDomain;
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -45,10 +49,10 @@ public class EmailSendingService {
                 "<h1>Ro'yxatdan o'tish</h1>\n" +
                 "<p>Ro'yxatdan o'tishni yakunlash uchun tugmani bosing:\n" +
                 "    <a  class=\"tugma\"\n" +
-                "            href=\"http://localhost:8080/auth/registration/verification/%d\" target=\"_blank\">tasdiqlash</a></p>\n" +
+                "            href=\"%s/auth/registration/verification/%s\" target=\"_blank\">tasdiqlash</a></p>\n" +
                 "</body>\n" +
                 "</html>";
-        body = String.format(body,profileId);
+        body = String.format(body,serverDomain, JwtUtil.encode(profileId));
 
         sendMimeEmail(email,subject,body);
 

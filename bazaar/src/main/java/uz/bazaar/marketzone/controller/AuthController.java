@@ -23,12 +23,12 @@ public class AuthController {
                 .build();
     }
 
-    @GetMapping("/registration/verification/{profileId}")
-    public ResponseDto<String> regVerification(@PathVariable("profileId") Integer profileId){
+    @GetMapping("/registration/verification/{token}")
+    public ResponseDto<String> regVerification(@PathVariable("token") String token){
         return ResponseDto.<String>builder()
                 .success(true)
                 .message("OK")
-                .data(authService.regVerification(profileId))
+                .data(authService.regVerification(token))
                 .build();
     }
 }
