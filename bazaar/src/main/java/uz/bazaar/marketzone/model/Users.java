@@ -2,6 +2,7 @@ package uz.bazaar.marketzone.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import uz.bazaar.marketzone.enums.GeneralStatus;
@@ -28,16 +29,17 @@ public class Users {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate createDate;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
+    @Size(min = 6, message = "Password must contain at least 6 character")
     private String password;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "status")
